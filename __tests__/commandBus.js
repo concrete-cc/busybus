@@ -14,6 +14,31 @@ const handlerFactory = jest.fn(() => {
 });
 
 describe('commandBus', () => {
+    describe('middlewares', () => {
+        const middlewares = [
+            jest.fn((cmd, next) => next(cmd)),
+            jest.fn(),
+            jest.fn()
+        ];
+
+        const bus = new CommandBus(middlewares);
+
+        const cmdInstance = new TestCommand();
+        bus.handle(cmdInstance);
+
+        it('should call first two middlewares with command and next middleware', () => {
+            for (let m of middlewares.slice(0, 2)) {
+                expect(m.mock.calls[0][0]).toBe(cmdInstance);
+                expect(m.mock.calls[0][1]).toBeInstanceOf(Function);
+                expect(m).toHaveBeenCalledTimes(1);
+            }
+        });
+
+        it('should not call last middleware', () => {
+            expect(middlewares[2]).toHaveBeenCalledTimes(0);
+        });
+    });
+
     describe('bind(command, handlerFactory)', () => {
         const bus = new CommandBus;
 
@@ -25,7 +50,7 @@ describe('commandBus', () => {
     });
 
     describe('handle(commandInstance)', () => {
-        const bus = new CommandBus;
+        const bus = new CommandBus();
 
         it('should call associated handlerFactory to obtain handler instance', () => {
             bus.bind(TestCommand, handlerFactory);
