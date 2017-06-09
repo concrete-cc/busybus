@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- node
+deploy:
+  provider: npm
+  email: infrastructure@concreteplatform.com
+  api_key:
+    secure: a91aHpYktT3UUa0Uxs+ZXAUCJXoX2rPJh5aVQ70a5xXyEzZyyrO/RBV6Q++axrvoA7mvgQX4wz1Jlu+tfEqQLdbDNjKnnfP60CnbxgUvFEYci5UOvf4W7OK1bzRFoGxBq6NE3t3hfBRJ521Rmd81BdZ3NeXcXODYoGGsDkmOtuVLlJdw3KrBNRcQiUqtwZwUnOmOTbrUsN0iP/DN8/lmBLuFqYFIzAI3QhA0+yCCcS/R7qQGSkBc+B4m/7uJHKmOxIc6WTNB7ro3GM48ZgP0eBC3C6uhfQREne15oiqLWAq32ZLnDGr3ozv91lnYMNoGOo67bB1JHubYB/LLcLNTtX+kuymD6fm1VA4sy4wGpRzYGOGGzTb34iE8syrGMScELeqKiLPJ9XrLqp/kkJxP3e1Tmv57ej6AQM1Kki4EXWjY9pITiYtAFinCqms0+iSfMUTNfRdhggoPD+XQENk4jdgwnw5EGwaZnxLUOuReHz+jLHuGyOK4DEnRKiVvSVxK0p/d9BJL2l7fDZnypE5NES4HzM1WL3jmJ0WPMlvRsPUm82fpsUc334/A6UNQhplpKy6V7OuEYxafMayEFecMhtjJpT2TCx8Orl5eZRUFdv1uxRsLzqiyYxZQxvV5TX3hngrECfhDqCrpE4frqgmvyEedXeedqyTCwhjZ60sur7Q=
+  on:
+    tags: true
+    repo: concrete-cc/busybus
