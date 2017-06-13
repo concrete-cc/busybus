@@ -39,12 +39,12 @@ describe('commandBus', () => {
         });
     });
 
-    describe('bind(command, handlerFactory)', () => {
+    describe('register(command, handlerFactory)', () => {
         const bus = new CommandBus;
 
         it('should bind command to a handlerFactory', () => {
             const cmdInstance = new TestCommand();
-            bus.bind(TestCommand, handlerFactory);
+            bus.register(TestCommand, handlerFactory);
             expect(bus.getHandlerFactory(cmdInstance)).toBe(handlerFactory);
         });
     });
@@ -53,7 +53,7 @@ describe('commandBus', () => {
         const bus = new CommandBus();
 
         it('should call associated handlerFactory to obtain handler instance', () => {
-            bus.bind(TestCommand, handlerFactory);
+            bus.register(TestCommand, handlerFactory);
             bus.handle(new TestCommand);
             expect(handlerFactory).toHaveBeenCalled();
         });
@@ -64,7 +64,7 @@ describe('commandBus', () => {
 
             const commandInstance = new TestCommand;
 
-            bus.bind(TestCommand, () => handlerInstance);
+            bus.register(TestCommand, () => handlerInstance);
             bus.handle(commandInstance);
             expect(handlerSpy).toHaveBeenCalledWith(commandInstance);
             expect(handlerSpy).toHaveBeenCalledTimes(1);
@@ -77,7 +77,7 @@ describe('commandBus', () => {
         });
 
         it('should throw an exception when handlerFactory returns handler with no handle method', () => {
-            bus.bind(TestCommand, () => {});
+            bus.register(TestCommand, () => {});
 
             expect(() => {
                 bus.handle(new TestCommand);
